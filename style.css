@@ -1,0 +1,173 @@
+/* Reset some basic styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding-top: 120px; /* Increased padding to make space for the fixed header */
+    background-image: url('fondo.jpg'); /* Ruta correcta a la imagen */
+    background-size: cover; /* Hace que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* Asegura que el body tenga altura completa */
+    background-attachment: fixed; /* Fija la imagen de fondo cuando haces scroll */
+}
+
+/* Header and navigation styles */
+.header {
+    background-color: #000; /* Fondo negro sólido */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;  /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;  /* Asegura que el header se quede por encima del contenido */
+    background-image: none; /* Elimina cualquier imagen de fondo en el header */
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+/* Estilos para el menú de navegación en pantallas grandes */
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;  /* Asegura que los botones estén separados */
+}
+
+.nav-links li {
+    display: inline;
+}
+
+/* Estilo de los botones */
+.button {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Active button style */
+.button:active {
+    transform: translateY(0);
+}
+
+/* Bienvenida */
+.bienvenida {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para la sección */
+    color: #333;
+    margin-top: 20px;
+}
+
+.bienvenida h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.bienvenida p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Estilo del menú hamburguesa */
+.menu-toggle {
+    display: none; /* Ocultar por defecto */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1500; /* Asegura que el icono de hamburguesa esté encima */
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    /* Ajustar tamaño del logo */
+    .header h1 {
+        font-size: 2em;
+    }
+
+    /* Menú de navegación en pantallas pequeñas */
+    .nav-links {
+        display: none; /* Por defecto está oculto */
+        flex-direction: column;
+        gap: 35px;  /* Asegura que los botones estén separados en el menú desplegado */
+        background-color: #000;
+        position: absolute;
+        top: 60px; /* Ajusta la distancia del menú desde el header */
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 1000; /* Asegura que el menú hamburguesa esté por encima de otros elementos */
+    }
+
+    /* Mostrar el menú hamburguesa en pantallas pequeñas */
+    .menu-toggle {
+        display: flex; /* Mostrar el icono de hamburguesa */
+    }
+
+    /* Cuando el menú está activo, mostrar los enlaces */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Ajustar los botones del menú en dispositivos pequeños */
+    .button {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+
+    /* Ajustar la sección de bienvenida en pantallas pequeñas */
+    .bienvenida h2 {
+        font-size: 1.8em;
+    }
+
+    .bienvenida p {
+        font-size: 1.1em;
+    }
+
+    /* Imagen de manga en tamaño adecuado */
+    #manga {
+        max-width: 90%; /* Se adapta mejor en pantallas pequeñas */
+        height: auto; /* Mantener la proporción de la imagen */
+    }
+
+    /* Botón de descarga en dispositivos móviles */
+    .boton-descarga {
+        font-size: 16px;
+        padding: 12px 30px;
+    }
+}

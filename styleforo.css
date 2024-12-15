@@ -1,0 +1,223 @@
+/* Reset some basic styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding-top: 120px; /* Increased padding to make space for the fixed header */
+    background-image: url('fondo.jpg'); /* Ruta correcta a la imagen */
+    background-size: cover; /* Hace que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* Asegura que el body tenga altura completa */
+    background-attachment: fixed; /* Fija la imagen de fondo cuando haces scroll */
+}
+
+/* Header and navigation styles */
+.header {
+    background-color: #000; /* Fondo negro sólido */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;  /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;  /* Asegura que el header se quede por encima del contenido */
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.button {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Active button style */
+.button:active {
+    transform: translateY(0);
+}
+
+/* Sección del foro */
+.foro {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
+    color: #333;
+    margin-top: 20px; /* Espacio para el header fijo */
+}
+
+.foro h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+/* Estilos de los temas */
+.temas {
+    margin-top: 30px;
+}
+
+.tema {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tema h3 a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 1.8em;
+}
+
+.tema p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Estilos del formulario para crear nuevo tema */
+.nuevo-tema {
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nuevo-tema h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1.2em;
+}
+
+form button {
+    margin-top: 20px;
+    font-size: 1.2em;
+    padding: 12px 25px;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo del menú hamburguesa */
+.menu-toggle {
+    display: none; /* Ocultar por defecto */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1500; /* Asegura que el icono de hamburguesa esté encima */
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Diseño responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+    /* Ajustes para el header en pantallas pequeñas */
+    .header h1 {
+        font-size: 2em;
+    }
+
+    /* Los enlaces de la barra de navegación se ordenan en columna */
+    .nav-links {
+        flex-direction: column;
+        gap: 35px;
+        display: none; /* Se ocultan por defecto en pantallas pequeñas */
+        background-color: #000;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        border-radius: 5px;
+        z-index: 1000;
+    }
+
+    /* Mostrar el icono de menú hamburguesa */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Mostrar el menú cuando se le añade la clase "active" */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Ajuste de los botones para pantallas pequeñas */
+    .button {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+
+    /* Ajuste de la sección de bienvenida */
+    .bienvenida h2 {
+        font-size: 1.8em;
+    }
+
+    .bienvenida p {
+        font-size: 1.1em;
+    }
+}
+
+/* Ajuste de la imagen de manga */
+#manga {
+    max-width: 100%; /* Asegura que la imagen no se desborde */
+    height: auto;
+}

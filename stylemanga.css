@@ -1,0 +1,140 @@
+/* Reset some basic styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding-top: 120px; /* Increased padding to make space for the fixed header */
+    background-image: url('fondo.jpg'); /* Ruta correcta a la imagen */
+    background-size: cover; /* Hace que la imagen cubra todo el fondo */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: 100vh; /* Asegura que el body tenga altura completa */
+    background-attachment: fixed; /* Fija la imagen de fondo cuando haces scroll */
+}
+
+/* Header and navigation styles */
+.header {
+    background-color: #000000; /* Fondo oscuro */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: fixed;  /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;  /* Asegura que el header se quede por encima del contenido */
+}
+
+.header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.button {
+    text-decoration: none;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+}
+
+/* Active button style */
+.button:active {
+    transform: translateY(0);
+}
+
+/* Bienvenida */
+.bienvenida {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para la sección */
+    color: #333;
+    margin-top: 20px;
+}
+
+.bienvenida h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.bienvenida p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+
+    .bienvenida h2 {
+        font-size: 1.8em;
+    }
+
+    .bienvenida p {
+        font-size: 1.1em;
+    }
+}
+
+#manga {
+    max-width: 300px;
+}
+
+.boton-descarga {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.boton-descarga:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Zone -- Suscripción</title>
+    <link rel="stylesheet" href="stylesuscripcion.css">
+    
+    <!-- Cargar el SDK de PayPal con tu Client ID -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AYJs5HnOAxTZThOq8xwzVW-o3bflfZaN5rpth6BD6uNXJAvyyfNeI0twyH5d_Drdw0LKh2bNSxIe_lPX&components=buttons"></script>
+    
+    <style>
+        /* Agregar más espacio entre el botón "Suscribirse" y el botón de PayPal */
+        .card button {
+            margin-bottom: 20px; /* Agrega un margen de 20px abajo del botón "Suscribirse" */
+        }
+
+        .paypal-button-container {
+            margin-top: 10px; /* Agrega un margen de 10px arriba del botón de PayPal */
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>The Last Zone</h1>
+                <nav>
+            <div class="menu-toggle" id="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" class="button">Bienvenida</a></li>
+                <li><a href="manga.html" class="button">Manga</a></li>
+                <li><a href="suscripcion.html" class="button">Suscripción</a></li>
+                <li><a href="sobre-nosotros.html" class="button">Sobre Nosotros</a></li>
+                <li><a href="foro.html" class="button">Foro</a></li>        
+            </ul>
+        </nav>
+
+    </header>
+
+    <main class="main-content">
+        <section class="suscripcion">
+            <h2>Planes de Suscripción</h2>
+            <div class="subscription-cards">
+                <!-- Card 1: Plan Básico -->
+                <div class="card" id="plan-basico">
+                    <h3>Plan Básico</h3>
+                    <p class="price">$3/mes</p> <!-- Actualizado -->
+                    <p>Acceso limitado a contenido exclusivo de manga. Ideal para quienes buscan empezar a explorar el mundo de The Last Zone.</p>
+                    <button class="button" onclick="mostrarBotonPaypal('basico')">Suscribirse</button>
+                    <div id="paypal-button-container-basico" class="paypal-button-container" style="display: none;"></div>
+                </div>
+
+                <!-- Card 2: Plan Premium -->
+                <div class="card" id="plan-premium">
+                    <h3>Plan Premium</h3>
+                    <p class="price">$7/mes</p> <!-- Actualizado -->
+                    <p>Acceso completo a todo el contenido premium, incluyendo manga, anime y más. Perfecto para los fans dedicados.</p>
+                    <button class="button" onclick="mostrarBotonPaypal('premium')">Suscribirse</button>
+                    <div id="paypal-button-container-premium" class="paypal-button-container" style="display: none;"></div>
+                </div>
+
+                <!-- Card 3: Plan Elite -->
+                <div class="card" id="plan-elite">
+                    <h3>Plan Elite</h3>
+                    <p class="price">$15/mes</p> <!-- Actualizado -->
+                    <p>Todo en el Plan Premium más acceso anticipado a lanzamientos y contenido exclusivo de entrevistas y eventos especiales.</p>
+                    <button class="button" onclick="mostrarBotonPaypal('elite')">Suscribirse</button>
+                    <div id="paypal-button-container-elite" class="paypal-button-container" style="display: none;"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Función para mostrar el botón de PayPal cuando el usuario elige un plan
+        function mostrarBotonPaypal(plan) {
+            // Ocultar todos los botones de PayPal antes de mostrar uno nuevo
+            document.querySelectorAll('.paypal-button-container').forEach(function(container) {
+                container.style.display = 'none'; // Ocultamos todos los botones
+            });
+
+            // Limpiar el contenedor de PayPal para evitar múltiples botones dentro del mismo
+            const containerId = `paypal-button-container-${plan}`;
+            const container = document.getElementById(containerId);
+            container.innerHTML = ''; // Limpiar cualquier contenido anterior
+
+            // Mostrar el contenedor de PayPal correspondiente al plan seleccionado
+            container.style.display = 'block'; // Solo mostramos el contenedor del plan seleccionado
+
+            // Configurar el botón de PayPal solo si no se ha hecho antes
+            if (!window[plan]) {
+                setupPaypalButton(plan);
+            }
+        }
+
+        // Configuración del botón de PayPal para cada plan
+        function setupPaypalButton(plan) {
+            const prices = {
+                'basico': 3,    // Actualizado
+                'premium': 7,   // Actualizado
+                'elite': 15     // Actualizado
+            };
+
+            const descriptions = {
+                'basico': 'Suscripción al Plan Básico',
+                'premium': 'Suscripción al Plan Premium',
+                'elite': 'Suscripción al Plan Elite'
+            };
+
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: prices[plan] // Precio del plan seleccionado
+                            },
+                            description: descriptions[plan] // Descripción del plan
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        // Mostrar mensaje de confirmación
+                        alert(`¡Gracias por tu suscripción al Plan ${plan.charAt(0).toUpperCase() + plan.slice(1)}! El pago de $${prices[plan]} se ha completado con éxito.`);
+                        console.log(details); // Mostrar detalles de la transacción
+                    });
+                },
+                onError: function(err) {
+                    // Mostrar mensaje de error en caso de fallo en el pago
+                    alert("Hubo un error procesando el pago. Por favor, intenta nuevamente.");
+                    console.log(err);
+                }
+            }).render(`#paypal-button-container-${plan}`); // Renderizar el botón de PayPal en el contenedor adecuado
+        }
+    </script>
+    <script src=""></script>
+</body>
+</html>

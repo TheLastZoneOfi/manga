@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last Zone -- Foro</title>
+    <link rel="stylesheet" href="styleforo.css"> <!-- Asegúrate de que el archivo CSS esté correctamente enlazado -->
+</head>
+<body>
+    <header class="header">
+        <h1>The Last Zone</h1>
+        <nav>
+            <div class="menu-toggle" id="menu-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-links" id="nav-links"> <!-- Se agrega el id "nav-links" -->
+                <li><a href="index.html" class="button">Bienvenida</a></li>
+                <li><a href="manga.html" class="button">Manga</a></li>
+                <li><a href="suscripcion.html" class="button">Suscripción</a></li>
+                <li><a href="sobre-nosotros.html" class="button">Sobre Nosotros</a></li>
+                <li><a href="foro.html" class="button">Foro</a></li>        
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="foro">
+            <h2>Foro de Discusión</h2>
+            
+            <!-- Lista de temas cargados desde el almacenamiento local -->
+            <div class="temas" id="temas-lista">
+                <p>No hay temas disponibles en este momento.</p>
+            </div>
+
+            <!-- Formulario para crear un nuevo tema -->
+            <div class="nuevo-tema">
+                <h3>Crear un nuevo tema</h3>
+                <form id="formulario-tema">
+                    <label for="nombre">Nombre de Usuario</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+
+                    <label for="titulo">Título del Tema</label>
+                    <input type="text" id="titulo" name="titulo" required placeholder="Titulo del Tema">
+
+                    <label for="contenido">Contenido</label>
+                    <textarea id="contenido" name="contenido" rows="5" required placeholder="Escribe tu Contenido"></textarea>
+
+                    <button type="submit" class="button">Crear Tema</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Función para cargar los temas del localStorage
+        function cargarTemas() {
+            const temas = JSON.parse(localStorage.getItem('temas')) || [];
+            const temasLista = document.getElementById('temas-lista');
+            
+            // Limpiar los temas actuales
+            temasLista.innerHTML = '';
+            
+            if (temas.length === 0) {
+                temasLista.innerHTML = '<p>No hay temas disponibles en este momento.</p>';
+            } else {
+                // Mostrar los temas guardados
+                temas.forEach(tema => {
+                    const divTema = document.createElement('div');
+                    divTema.classList.add('tema');
+                    divTema.innerHTML = `
+                        <h3><a href="#">${tema.titulo}</a></h3>
+                        <p>${tema.contenido}</p>
+                        <p>Publicado por <strong>${tema.nombre}</strong></p>
+                    `;
+                    temasLista.appendChild(divTema);
+                });
+            }
+        }
+
+        // Función para manejar la creación de un nuevo tema
+        document.getElementById('formulario-tema').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevenir el envío del formulario
+            
+            const nombre = document.getElementById('nombre').value;
+            const titulo = document.getElementById('titulo').value;
+            const contenido = document.getElementById('contenido').value;
+
+            // Validar que los campos no estén vacíos
+            if (nombre && titulo && contenido) {
+                const nuevoTema = {
+                    nombre: nombre,
+                    titulo: titulo,
+                    contenido: contenido
+                };
+
+                // Obtener los temas actuales del localStorage
+                const temas = JSON.parse(localStorage.getItem('temas')) || [];
+                temas.push(nuevoTema);
+
+                // Guardar los nuevos temas en el localStorage
+                localStorage.setItem('temas', JSON.stringify(temas));
+
+                // Limpiar los campos del formulario
+                document.getElementById('nombre').value = '';
+                document.getElementById('titulo').value = '';
+                document.getElementById('contenido').value = '';
+
+                // Volver a cargar los temas
+                cargarTemas();
+            } else {
+                alert('Por favor, completa todos los campos.');
+            }
+        });
+
+        // Cargar los temas al cargar la página
+        window.onload = cargarTemas;
+
+        // JavaScript para alternar la visibilidad del menú en dispositivos móviles
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+    
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
