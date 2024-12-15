@@ -134,6 +134,13 @@
                     console.log(err);
                 }
             }).render(`#paypal-button-container-${plan}`); // Renderizar el botón de PayPal en el contenedor adecuado
+            // JavaScript para alternar la visibilidad del menú en dispositivos móviles
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinks = document.getElementById('nav-links');
+    
+            menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
         }
     </script>
     <script src="script.js"></script>
